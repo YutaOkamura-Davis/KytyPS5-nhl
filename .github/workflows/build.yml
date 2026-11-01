@@ -387,7 +387,7 @@ jobs:
         shell: bash
         run: |
           cmake --build _Build/linux \
-            --target launcher page_manager_tests memory_tracker_tests \
+            --target launcher shader_recompiler_compute_tests page_manager_tests memory_tracker_tests \
               audio_out2_port_tests ime_dialog_tests virtual_memory_allocation_tests \
             --parallel
 
@@ -396,6 +396,10 @@ jobs:
         run: |
           ctest --test-dir _Build/linux --output-on-failure \
             -R '^(audio_out2_port|ime_dialog|page_manager|memory_tracker|virtual_memory_allocation)$'
+
+      - name: Check depth format footprints
+        shell: bash
+        run: _Build/linux/shader_recompiler_compute_tests --depth-readback-only
 
       - name: Install
         shell: bash

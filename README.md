@@ -1,3 +1,29 @@
+# Personal sports fork with MLB depth-copy fix
+
+This fork preserves macery12/KytyPS5-Sports at `075ba120` and backports
+KytyPS5/KytyPS5 commit `0685bffb` (PR #1873, merged October 27, 2026).
+It does not include the full current upstream tree.
+
+The fix converts guest D16 depth between native D16 and four-byte host
+D24/D32 depth when an image gains or loses a stencil plane. It addresses
+an MLB The Show 26 pitcher-introduction crash; it does not establish new
+NHL compatibility or performance. The backport retains the sports fork's
+per-layer copies and separate scratch-buffer allocations. Upstream's
+regression checks are included in the compute test target.
+
+The NHL 26 **10 FPS** result below is inherited from the original fork's
+September 15, 2026 snapshot. It has not been remeasured with this fix.
+Game testing still requires your own game files and compatible GPU.
+
+Builds are available through this fork's GitHub Actions artifacts after a
+successful run. The Linux job also compiles the compute regression tests
+and runs the CPU depth-footprint checks. The GPU image-copy regression
+requires a compatible GPU and is not exercised by those CPU checks.
+
+Original sports-fork documentation follows.
+
+---
+
 # KytyPS5
 
 [![Build KytyPS5 (Windows)](https://img.shields.io/github/actions/workflow/status/KytyPS5/KytyPS5/build.yml?branch=main&event=push&label=Build%20KytyPS5%20%28Windows%29)](https://github.com/KytyPS5/KytyPS5/actions/workflows/build.yml)
